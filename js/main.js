@@ -14,6 +14,8 @@
     ["feeding.html", "nav.feeding"],
     ["growth.html", "nav.growth"],
     ["calculator.html", "nav.calculator"],
+    ["area.html", "nav.area"],
+    ["diary.html", "nav.diary"],
   ];
 
   function load(key) {
@@ -121,15 +123,29 @@
   };
 
   // День выращивания: день заселения = 1-й день. 0 или меньше — партия ещё не заселена.
+  function parseDate(s) {
+    const [y, m, d] = s.split("-").map(Number);
+    return new Date(y, m - 1, d);
+  }
+
+  App.todayISO = function () {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  };
+
+  // Какой день выращивания был в дату dateISO ("2026-10-29").
+  App.dayOfDate = function (batch, dateISO) {
+    if (!batch || !dateISO) return null;
+    return Math.round((parseDate(dateISO) - parseDate(batch.start)) / 86400000) + 1;
+  };
+
   App.batchDay = function (batch) {
     batch = batch || App.batch();
-    if (!batch) return null;
-    const [y, m, d] = batch.start.split("-").map(Number);
-    const start = new Date(y, m - 1, d);
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    return Math.round((today - start) / 86400000) + 1;
+    return batch ? App.dayOfDate(batch, App.todayISO()) : null;
   };
+
+  App.escape = (s) =>
+    String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 
   /* ---------- Шапка и подвал ---------- */
 
@@ -173,6 +189,9 @@
     });
   }
 
+  const TG_ICON =
+    '<svg class="tg-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.9 4.3 18.7 19.4c-.2 1.1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.4-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.2 13 1.4 11.5c-1-.3-1.1-1 .2-1.5L20.5 2.8c.9-.3 1.7.2 1.4 1.5z"/></svg>';
+
   // +998933003926 → +998 93 300 39 26
   function prettyPhone(p) {
     const d = p.replace(/\D/g, "");
@@ -183,7 +202,23 @@
   function renderFooter() {
     const el = document.getElementById("site-footer");
     if (!el) return;
-    const phone = (window.SITE && window.SITE.adPhone) || "";
+    const site = window.SITE || {};
+    const phone = site.adPhone || "";
+    const tgGroup = (site.telegramGroup || "").trim();
+    const tgUser = (site.telegramUser || "").trim().replace(/^@/, "");
+    const tgLinks = [
+      tgGroup ? `<a class="tg-btn" href="${App.escape(tgGroup)}" target="_blank" rel="noopener">${TG_ICON}<span data-i18n="tg.group"></span></a>` : "",
+      tgUser ? `<a class="tg-btn tg-btn-light" href="https://t.me/${App.escape(tgUser)}" target="_blank" rel="noopener">${TG_ICON}<span><span data-i18n="tg.user"></span> @${App.escape(tgUser)}</span></a>` : "",
+    ].join("");
+    const community = tgLinks
+      ? `<aside class="tg-box">
+          <div>
+            <p class="tg-title" data-i18n="tg.title"></p>
+            <p class="tg-text" data-i18n="tg.text"></p>
+          </div>
+          <div class="tg-links">${tgLinks}</div>
+        </aside>`
+      : "";
     const ad = phone
       ? `<aside class="ad-box">
           <div>
@@ -193,7 +228,7 @@
           <a class="ad-phone" href="tel:${phone.replace(/[^\d+]/g, "")}">${prettyPhone(phone)}</a>
         </aside>`
       : "";
-    el.innerHTML = `<div class="wrap">${ad}<p><b data-i18n="site.name"></b> · <span data-i18n="site.tagline"></span></p><p data-i18n="footer.disclaimer"></p></div>`;
+    el.innerHTML = `<div class="wrap">${community}${ad}<p><b data-i18n="site.name"></b> · <span data-i18n="site.tagline"></span></p><p data-i18n="footer.disclaimer"></p></div>`;
   }
 
   // Последнее слово названия выделяется цветом: BROLLER <b>BRO</b>
@@ -209,6 +244,9 @@
     document.documentElement.lang = App.t("lang.code");
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       el.textContent = App.t(el.dataset.i18n);
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+      el.placeholder = App.t(el.dataset.i18nPlaceholder);
     });
     document.querySelectorAll("[data-i18n-html]").forEach((el) => {
       el.innerHTML = App.t(el.dataset.i18nHtml);

@@ -99,6 +99,40 @@ h3 { font-size: 1.05rem; margin: 0 0 0.3em; }
   padding-block: 20px 32px;
 }
 
+/* ---------- Telegram ---------- */
+.tg-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: 16px;
+  padding: 18px 20px;
+  border-radius: var(--radius);
+  background: #e8f4fb;
+  border: 1px solid #c4e2f3;
+  color: var(--text);
+}
+.tg-box p { margin: 0; }
+.tg-title { font-weight: 800; font-size: 1.1rem; color: #136b94; }
+.tg-text { color: var(--muted); }
+.tg-links { display: flex; flex-wrap: wrap; gap: 10px; }
+.tg-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: #229ed9;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+.tg-btn:hover { background: #1a8bc0; }
+.tg-btn-light { background: #fff; color: #136b94; border: 1px solid #9fd0ea; }
+.tg-btn-light:hover { background: #f3fafe; }
+.tg-icon { width: 20px; height: 20px; flex: none; }
+
 /* ---------- Место для рекламы ---------- */
 .ad-box {
   display: flex;
@@ -342,6 +376,51 @@ fieldset .field { max-width: none; }
   vertical-align: middle;
 }
 #check { scroll-margin-top: 80px; }
+
+/* ---------- Расчёт птичника ---------- */
+.equip-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.equip-list li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 12px;
+  padding: 10px 12px;
+  background: #f7f4ea;
+  border-radius: 10px;
+}
+.equip-list strong { font-variant-numeric: tabular-nums; }
+.equip-list small { font-weight: 400; color: var(--muted); }
+
+/* ---------- Дневник партии ---------- */
+.notice { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.notice p { margin: 0; font-weight: 600; }
+a.btn-primary { text-decoration: none; display: inline-block; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+.form-grid .field { max-width: none; }
+.form-wide { grid-column: 1 / -1; }
+.form-msg { color: var(--bad); font-weight: 600; margin: 0 0 12px; }
+.today-tile small { display: block; font-size: 0.8rem; color: var(--muted); }
+.today-tile.is-good small { color: var(--good); font-weight: 600; }
+.today-tile.is-bad small { color: var(--bad); font-weight: 600; }
+.diary-chart-panel { margin-top: 16px; }
+.section-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
+.section-head h2 { margin-bottom: 0.3em; }
+.section-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.pct-good { color: var(--good); font-weight: 700; }
+.pct-bad { color: var(--bad); font-weight: 700; }
+.note-cell { text-align: left !important; white-space: normal !important; min-width: 10em; max-width: 22em; }
+.btn-del {
+  font: inherit;
+  font-size: 0.82rem;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--muted);
+  border-radius: 8px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+.btn-del:hover { border-color: var(--bad); color: var(--bad); }
+.btn-del.is-armed, .btn-link.is-armed { background: var(--bad); color: #fff; border-color: var(--bad); border-radius: 8px; text-decoration: none; }
 
 /* ---------- Телефоны ---------- */
 @media (max-width: 800px) {

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Расчёт птичника</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-title="area.title">
+  <header id="site-header" class="site-header"></header>
+
+  <main class="wrap">
+    <h1 data-i18n="area.title"></h1>
+    <p class="lead" data-i18n="area.lead"></p>
+
+    <div class="calc-grid">
+      <form id="area-form" class="panel">
+        <h2 data-i18n="calc.inputs"></h2>
+        <fieldset>
+          <label class="field"><span data-i18n="common.breed"></span><select id="breed"></select></label>
+          <label class="field"><span data-i18n="area.birds"></span><input id="area-birds" type="number" min="1" step="1" value="100" inputmode="numeric"></label>
+          <label class="field"><span data-i18n="area.day"></span><input id="area-day" type="number" min="1" max="45" step="1" value="42" inputmode="numeric"></label>
+          <label class="field">
+            <span data-i18n="area.density"></span>
+            <input id="area-density" type="number" min="10" max="45" step="1" inputmode="numeric">
+            <small class="muted" data-i18n="area.density.hint"></small>
+          </label>
+        </fieldset>
+      </form>
+
+      <section class="panel result-panel" aria-live="polite">
+        <h2 data-i18n="area.result"></h2>
+        <div id="area-output"></div>
+      </section>
+    </div>
+
+    <h2 data-i18n="area.weeks"></h2>
+    <div class="table-wrap">
+      <table id="area-table" class="data-table">
+        <thead>
+          <tr>
+            <th data-i18n="area.th.day"></th>
+            <th data-i18n="area.th.area"></th>
+            <th data-i18n="area.th.perM2"></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="muted small" data-i18n="area.note"></p>
+  </main>
+
+  <footer id="site-footer" class="site-footer"></footer>
+
+  <script src="lang/ru.js"></script>
+  <script src="lang/uz.js"></script>
+  <script src="data/breeds.js"></script>
+  <script src="data/phases.js"></script>
+  <script src="data/area.js"></script>
+  <script src="data/site.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/area.js"></script>
+</body>
+</html>

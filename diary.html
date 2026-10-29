@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Дневник партии</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-title="diary.title">
+  <header id="site-header" class="site-header"></header>
+
+  <main class="wrap">
+    <h1 data-i18n="diary.title"></h1>
+    <p class="lead" data-i18n="diary.lead"></p>
+
+    <div id="diary-nobatch" class="panel notice" hidden>
+      <p data-i18n="diary.noBatch"></p>
+      <a class="btn-primary" href="index.html" data-i18n="diary.toHome"></a>
+    </div>
+
+    <div id="diary-app" hidden>
+      <div class="calc-grid">
+        <form id="diary-form" class="panel">
+          <h2 data-i18n="diary.add"></h2>
+          <div class="form-grid">
+            <label class="field"><span data-i18n="diary.date"></span><input id="d-date" type="date" required></label>
+            <label class="field"><span data-i18n="diary.weight"></span><input id="d-weight" type="number" min="0" step="1" inputmode="numeric"></label>
+            <label class="field"><span data-i18n="diary.feed"></span><input id="d-feed" type="number" min="0" step="0.1" inputmode="decimal"></label>
+            <label class="field"><span data-i18n="diary.dead"></span><input id="d-dead" type="number" min="0" step="1" inputmode="numeric"></label>
+            <label class="field form-wide"><span data-i18n="diary.note"></span><input id="d-note" type="text" maxlength="200" data-i18n-placeholder="diary.note.ph"></label>
+          </div>
+          <p id="d-msg" class="form-msg" hidden></p>
+          <button type="submit" class="btn-primary" data-i18n="diary.save"></button>
+        </form>
+
+        <section class="panel">
+          <h2 data-i18n="diary.summary"></h2>
+          <div id="diary-summary" class="today-grid"></div>
+        </section>
+      </div>
+
+      <section class="panel diary-chart-panel">
+        <h2 data-i18n="diary.chart"></h2>
+        <div class="chart-box"><canvas id="diary-chart"></canvas></div>
+      </section>
+
+      <div class="section-head">
+        <h2 data-i18n="diary.entries"></h2>
+        <div class="section-actions">
+          <button type="button" id="diary-export" class="btn-secondary" data-i18n="diary.export"></button>
+          <button type="button" id="diary-clear" class="btn-link" data-i18n="diary.clear"></button>
+        </div>
+      </div>
+      <p class="muted small" data-i18n="diary.local"></p>
+      <div class="table-wrap">
+        <table id="diary-table" class="data-table">
+          <thead>
+            <tr>
+              <th data-i18n="diary.th.date"></th>
+              <th data-i18n="diary.th.day"></th>
+              <th data-i18n="diary.th.weight"></th>
+              <th data-i18n="diary.th.norm"></th>
+              <th data-i18n="diary.th.pct"></th>
+              <th data-i18n="diary.th.feed"></th>
+              <th data-i18n="diary.th.dead"></th>
+              <th data-i18n="diary.th.note"></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p id="diary-empty" class="muted" data-i18n="diary.empty" hidden></p>
+    </div>
+  </main>
+
+  <footer id="site-footer" class="site-footer"></footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="lang/ru.js"></script>
+  <script src="lang/uz.js"></script>
+  <script src="data/breeds.js"></script>
+  <script src="data/phases.js"></script>
+  <script src="data/site.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/diary.js"></script>
+</body>
+</html>
