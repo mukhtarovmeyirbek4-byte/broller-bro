@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Вес по дням</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-title="growth.title">
+  <header id="site-header" class="site-header"></header>
+
+  <main class="wrap">
+    <h1 data-i18n="growth.title"></h1>
+    <p class="lead" data-i18n="growth.lead"></p>
+
+    <div class="controls">
+      <label class="field">
+        <span data-i18n="common.breed"></span>
+        <select id="breed"></select>
+      </label>
+    </div>
+
+    <div class="growth-grid">
+      <section class="panel">
+        <h2 data-i18n="growth.chart.title"></h2>
+        <div class="chart-box">
+          <canvas id="growth-chart"></canvas>
+          <p id="chart-nolib" class="muted" data-i18n="growth.chart.noLib" hidden></p>
+        </div>
+      </section>
+
+      <section class="panel" id="check">
+        <h2 data-i18n="growth.check.title"></h2>
+        <p class="muted" data-i18n="growth.check.text"></p>
+        <div class="controls">
+          <label class="field">
+            <span data-i18n="growth.check.day"></span>
+            <input id="check-day" type="number" min="0" max="45" step="1" value="21" inputmode="numeric">
+          </label>
+          <label class="field">
+            <span data-i18n="growth.check.weight"></span>
+            <input id="check-weight" type="number" min="0" step="1" placeholder="900" inputmode="numeric">
+          </label>
+        </div>
+        <div id="check-result" class="check-result" hidden></div>
+      </section>
+    </div>
+
+    <h2 data-i18n="growth.table.title"></h2>
+    <p class="muted" data-i18n="growth.fcr.hint"></p>
+    <div class="table-wrap">
+      <table id="growth-table" class="data-table">
+        <thead>
+          <tr>
+            <th data-i18n="growth.th.day"></th>
+            <th data-i18n="growth.th.weight"></th>
+            <th data-i18n="growth.th.gain"></th>
+            <th data-i18n="growth.th.cumFeed"></th>
+            <th data-i18n="growth.th.fcr"></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer id="site-footer" class="site-footer"></footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="lang/ru.js"></script>
+  <script src="lang/uz.js"></script>
+  <script src="data/breeds.js"></script>
+  <script src="data/phases.js"></script>
+  <script src="data/site.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/growth.js"></script>
+</body>
+</html>

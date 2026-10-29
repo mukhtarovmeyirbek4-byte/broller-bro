@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>График кормления</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-title="feeding.title">
+  <header id="site-header" class="site-header"></header>
+
+  <main class="wrap">
+    <h1 data-i18n="feeding.title"></h1>
+    <p class="lead" data-i18n="feeding.lead"></p>
+
+    <div class="controls">
+      <label class="field">
+        <span data-i18n="common.breed"></span>
+        <select id="breed"></select>
+      </label>
+      <label class="field">
+        <span data-i18n="feeding.flock"></span>
+        <input id="flock" type="number" min="0" step="1" value="100" inputmode="numeric">
+      </label>
+      <button id="jump-today" type="button" class="btn-primary controls-btn" data-i18n="feeding.jumpToday" hidden></button>
+    </div>
+
+    <h2 data-i18n="feeding.phases.title"></h2>
+    <div id="phases" class="phases"></div>
+
+    <h2 data-i18n="feeding.table.title"></h2>
+    <div class="table-wrap">
+      <table id="feed-table" class="data-table phase-rows">
+        <thead>
+          <tr>
+            <th data-i18n="feeding.th.day"></th>
+            <th data-i18n="feeding.th.phase"></th>
+            <th data-i18n="feeding.th.perBird"></th>
+            <th data-i18n="feeding.th.perFlock"></th>
+            <th data-i18n="feeding.th.cum"></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer id="site-footer" class="site-footer"></footer>
+
+  <script src="lang/ru.js"></script>
+  <script src="lang/uz.js"></script>
+  <script src="data/breeds.js"></script>
+  <script src="data/phases.js"></script>
+  <script src="data/site.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/feeding.js"></script>
+</body>
+</html>
