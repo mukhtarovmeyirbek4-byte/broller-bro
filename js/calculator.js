@@ -92,6 +92,12 @@
       </dl>
       <h3>${t("calc.breakdown")}</h3>
       <div class="bars">${bars}</div>`;
+
+    const bar = document.getElementById("profit-bar");
+    if (bar) {
+      bar.className = "profit-bar " + (isProfit ? "is-profit" : "is-loss");
+      bar.innerHTML = `<span>${t(isProfit ? "calc.profit" : "calc.loss")}</span><strong>${App.fmt(Math.abs(r.profit))}${sum}</strong>`;
+    }
   }
 
   fillDefaults();

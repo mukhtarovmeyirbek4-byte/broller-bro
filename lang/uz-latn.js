@@ -14,12 +14,20 @@ window.LANG["uz-latn"] = {
   "site.name": "BROLLER BRO",
   "site.tagline": "Boshlovchi fermer yordamchisi",
   "nav.menu": "Menyu",
+  "nav.lang": "🌐 Til",
   "nav.home": "Bosh sahifa",
   "nav.feeding": "Oziqlantirish",
   "nav.growth": "Kunlik vazn",
   "nav.calculator": "Kalkulyator",
   "nav.area": "Parrandaxona",
   "nav.diary": "Kundalik",
+  // Короткие подписи нижнего меню на телефоне
+  "tab.home": "Asosiy",
+  "tab.feeding": "Yem",
+  "tab.growth": "Vazn",
+  "tab.calculator": "Foyda",
+  "tab.area": "Maydon",
+  "tab.diary": "Kundalik",
   "tg.title": "Fermerlar hamjamiyati",
   "tg.text": "Telegram guruhimizda savol bering va tajriba almashing.",
   "tg.group": "Telegram guruhi",
@@ -219,4 +227,16 @@ window.LANG["uz-latn"] = {
   "diary.confirm": "Aniqmi?",
   "diary.export": "Jadvalni yuklab olish (Excel)",
   "diary.clear": "Kundalikni tozalash",
+
+  // Ilovani oʻrnatish
+  "pwa.install": "📲 Ilovani telefonga oʻrnatish",
+  "pwa.iosHint": "📲 iPhone'ga ilova sifatida oʻrnatish: ekran pastidagi «Ulashish» tugmasini bosing va «Uy ekraniga» ni tanlang.",
+
+  // Google, Yandex va Telegram'dagi havola uchun sahifa tavsifi (~160 belgigacha)
+  "meta.home": "Boshlovchi fermerlar uchun broylerlar: kunlar boʻyicha oziqlantirish jadvali, Ross 308 va Cobb 500 vazn meʼyorlari, foyda kalkulyatori va parrandaxona hisobi.",
+  "meta.feeding": "Broylerlarni 1 dan 45 kungacha oziqlantirish jadvali: bitta parrandaga va barcha parrandalarga necha gramm yem berish kerak. Start, Oʻsish va Finish davrlari.",
+  "meta.growth": "Broylerning kunlar boʻyicha vazni: Ross 308 va Cobb 500 meʼyorlari jadvali va grafigi, 1 dan 45 kungacha. Parrandani torting va meʼyor bilan solishtiring.",
+  "meta.calc": "Broylerdan foyda kalkulyatori: joʻja, yem va veterinariya xarajatlari, tushum, foyda va 1 kg goʻsht tannarxi soʻmda.",
+  "meta.area": "Broyler parrandaxonasini hisoblash: pol maydoni, xona oʻlchamlari, partiyangiz uchun qancha oxur, suvdon va lampa kerak.",
+  "meta.diary": "Broyler partiyasi kundaligi: vazn, yem va nobudgarchilikni kunma-kun yozib boring, meʼyor bilan solishtiring va jadvalni Excel'ga yuklab oling.",
 };

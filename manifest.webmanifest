@@ -1,0 +1,22 @@
+{
+  "name": "BROLLER BRO — помощник фермера",
+  "short_name": "BROLLER BRO",
+  "description": "График кормления, вес по дням, калькулятор прибыли и дневник партии для бройлеров.",
+  "lang": "ru",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#faf7ef",
+  "theme_color": "#2f6b3a",
+  "icons": [
+    { "src": "img/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "img/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "img/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Кормление", "url": "./feeding.html", "icons": [{ "src": "img/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Дневник", "url": "./diary.html", "icons": [{ "src": "img/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Калькулятор", "url": "./calculator.html", "icons": [{ "src": "img/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

@@ -463,3 +463,158 @@ a.btn-primary { text-decoration: none; display: inline-block; }
   .stats { grid-template-columns: 1fr; }
   .bar-row { grid-template-columns: 7em 1fr 3em; }
 }
+
+/* ---------- Установка приложения (PWA) ---------- */
+.pwa-box {
+  margin-bottom: 20px;
+  padding: 14px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+}
+.pwa-box[hidden] { display: none; }
+.pwa-box p { margin: 0; color: var(--text); }
+.pwa-box .btn-secondary { font-weight: 700; font-size: 1rem; }
+
+/* ---------- Удобство на телефоне ---------- */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+a, button, input, select, label { -webkit-tap-highlight-color: rgba(47, 107, 58, 0.15); }
+button, .btn-primary, .btn-secondary, .tg-btn, .ad-phone { touch-action: manipulation; }
+
+/* Нижнее меню — только на телефоне */
+.tabbar { display: none; }
+
+@media (max-width: 800px) {
+  /* 16px в полях — иначе iPhone сам увеличивает страницу при вводе */
+  input, select { font-size: 16px; min-height: 44px; }
+  .btn-primary, .btn-secondary, .tg-btn { min-height: 44px; }
+  .btn-primary, .btn-secondary { padding-inline: 18px; }
+  .batch-actions .btn-primary, #diary-form .btn-primary { width: 100%; }
+
+  main.wrap { padding-block: 16px 32px; }
+  h2 { margin-top: 1.3em; }
+  .panel { padding: 16px; }
+  .hero-band { padding-block: 20px 28px; }
+  .chart-box { height: 260px; }
+
+  /* Таблицы: компактнее, первый столбец (день) не уезжает при прокрутке вбок */
+  .data-table th, .data-table td { padding: 8px 10px; }
+  .data-table th:first-child, .data-table td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: var(--card);
+    box-shadow: 1px 0 0 var(--line);
+  }
+  .data-table thead th:first-child { z-index: 2; background: #f2eee3; }
+  .data-table tr.is-today td:first-child { background: #fff3c4; }
+
+  /* Телефонный номер рекламы — на всю ширину, удобно нажать */
+  .ad-phone { display: block; width: 100%; text-align: center; }
+  .tg-links, .tg-btn { width: 100%; }
+  .tg-btn { justify-content: center; }
+
+  /* Нижнее меню */
+  body.has-tabbar { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+  .tabbar {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    background: var(--card);
+    border-top: 1px solid var(--line);
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.06);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .tabbar a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-height: 58px;
+    padding: 6px 2px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.68rem;
+    font-weight: 600;
+    line-height: 1.1;
+    text-align: center;
+  }
+  .tabbar span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tabbar svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .tabbar a[aria-current="page"] { color: var(--green); }
+  .tabbar a[aria-current="page"] svg { stroke-width: 2.3; }
+  .tabbar a[aria-current="page"]::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 28px;
+    height: 3px;
+    border-radius: 0 0 3px 3px;
+    background: var(--green);
+  }
+  .tabbar a { position: relative; }
+
+  /* Верхнее меню на телефоне не дублирует страницы — в нём остаётся выбор языка */
+  .header-menu .nav { display: none; }
+  .lang-switch { align-self: stretch; }
+  .lang-switch button { flex: 1; padding: 10px 8px; }
+}
+
+/* Чёлка и скруглённые углы iPhone в режиме приложения */
+@supports (padding: env(safe-area-inset-top)) {
+  .site-header { padding-top: env(safe-area-inset-top); }
+  .wrap { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
+}
+
+/* Выпадающие списки одной высоты с полями и со своей стрелкой */
+select {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 36px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232f6b3a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 18px;
+}
+@media (max-width: 800px) {
+  .tabbar a[aria-current="page"]::before { left: 50%; transform: translateX(-50%); }
+}
+
+/* Калькулятор: прибыль всегда видна внизу экрана телефона */
+.profit-bar { display: none; }
+#calc-result { scroll-margin-top: 80px; }
+@media (max-width: 800px) {
+  .profit-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: calc(68px + env(safe-area-inset-bottom));
+    z-index: 19;
+    padding: 10px 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+    font-weight: 700;
+  }
+  .profit-bar strong { font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+  .profit-bar.is-profit { background: #e5f3e6; color: var(--good); border: 1px solid #b9dcbc; }
+  .profit-bar.is-loss { background: #fbe9e6; color: var(--bad); border: 1px solid #f0c3bb; }
+  body:has(.profit-bar) { padding-bottom: calc(124px + env(safe-area-inset-bottom)); }
+}

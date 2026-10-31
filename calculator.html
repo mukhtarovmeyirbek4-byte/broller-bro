@@ -2,11 +2,32 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Калькулятор прибыли</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Калькулятор прибыли · BROLLER BRO</title>
+  <meta name="description" content="Калькулятор прибыли на бройлерах: расходы на цыплят, корм и ветеринарию, выручка, прибыль и себестоимость 1 кг мяса в сумах.">
+  <link rel="canonical" href="https://mukhtarovmeyirbek4-byte.github.io/broller-bro/calculator.html">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="img/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="img/icon-180.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="BROLLER BRO">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#2f6b3a">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="BROLLER BRO">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Калькулятор прибыли · BROLLER BRO">
+  <meta property="og:description" content="Калькулятор прибыли на бройлерах: расходы на цыплят, корм и ветеринарию, выручка, прибыль и себестоимость 1 кг мяса в сумах.">
+  <meta property="og:url" content="https://mukhtarovmeyirbek4-byte.github.io/broller-bro/calculator.html">
+  <meta property="og:image" content="https://mukhtarovmeyirbek4-byte.github.io/broller-bro/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body data-title="calc.title">
+<body data-title="calc.title" data-meta="meta.calc">
   <header id="site-header" class="site-header"></header>
 
   <main class="wrap">
@@ -47,12 +68,15 @@
         <button id="calc-reset" type="button" class="btn-secondary" data-i18n="calc.reset"></button>
       </form>
 
-      <section class="panel result-panel" aria-live="polite">
+      <section class="panel result-panel" id="calc-result" aria-live="polite">
         <h2 data-i18n="calc.result"></h2>
         <div id="calc-output"></div>
         <p class="muted small" data-i18n="calc.note"></p>
       </section>
     </div>
+
+    <!-- Полоска с прибылью внизу экрана телефона; нажатие ведёт к подробному результату -->
+    <a href="#calc-result" class="profit-bar" id="profit-bar"></a>
   </main>
 
   <footer id="site-footer" class="site-footer"></footer>

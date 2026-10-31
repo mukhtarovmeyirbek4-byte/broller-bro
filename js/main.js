@@ -172,7 +172,7 @@
         </a>
         <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
           <span class="nav-toggle-bars" aria-hidden="true"></span>
-          <span data-i18n="nav.menu"></span>
+          <span data-i18n="nav.lang"></span>
         </button>
         <div class="header-menu" id="site-nav">
           <nav class="nav">${nav}</nav>
@@ -187,6 +187,32 @@
       const open = el.classList.toggle("is-open");
       toggle.setAttribute("aria-expanded", String(open));
     });
+  }
+
+  // Значки нижнего меню на телефоне (по одному на страницу из PAGES).
+  const TAB_ICONS = {
+    "index.html": '<path d="M3 11 12 3l9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+    "feeding.html": '<path d="M3 12h18a9 9 0 0 1-18 0z"/><path d="M8 8.5h.01M12 7h.01M16 8.5h.01"/>',
+    "growth.html": '<path d="M3 21h18"/><path d="M6 17v-5M11 17V8M16 17v-8M20 17V4"/>',
+    "calculator.html": '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01"/>',
+    "area.html": '<path d="M3 21V10l9-6 9 6v11"/><path d="M9 21v-6h6v6"/>',
+    "diary.html": '<path d="M6 3h10a3 3 0 0 1 3 3v15H7a2 2 0 0 1-2-2V4a1 1 0 0 1 1-1z"/><path d="M5 18a2 2 0 0 1 2-2h12M9 7h6M9 11h4"/>',
+  };
+
+  // Нижнее меню, как в приложениях. Видно только на узких экранах (см. .tabbar в style.css).
+  function renderTabbar() {
+    const current = location.pathname.split("/").pop() || "index.html";
+    const bar = document.createElement("nav");
+    bar.className = "tabbar";
+    bar.setAttribute("aria-label", "Menu");
+    bar.innerHTML = PAGES.map(([href, key]) => {
+      const tab = key.replace("nav.", "tab.");
+      return `<a href="${href}"${href === current ? ' aria-current="page"' : ""}>
+        <svg viewBox="0 0 24 24" aria-hidden="true">${TAB_ICONS[href] || ""}</svg>
+        <span data-i18n="${tab}"></span></a>`;
+    }).join("");
+    document.body.appendChild(bar);
+    document.body.classList.add("has-tabbar");
   }
 
   const TG_ICON =
@@ -228,7 +254,11 @@
           <a class="ad-phone" href="tel:${phone.replace(/[^\d+]/g, "")}">${prettyPhone(phone)}</a>
         </aside>`
       : "";
-    el.innerHTML = `<div class="wrap">${community}${ad}<p><b data-i18n="site.name"></b> · <span data-i18n="site.tagline"></span></p><p data-i18n="footer.disclaimer"></p></div>`;
+    const install = `<aside class="pwa-box" id="pwa-box" hidden>
+        <button type="button" class="btn-secondary" id="pwa-install" data-i18n="pwa.install" hidden></button>
+        <p class="small" id="pwa-ios" data-i18n="pwa.iosHint" hidden></p>
+      </aside>`;
+    el.innerHTML = `<div class="wrap">${community}${ad}${install}<p><b data-i18n="site.name"></b> · <span data-i18n="site.tagline"></span></p><p data-i18n="footer.disclaimer"></p></div>`;
   }
 
   // Последнее слово названия выделяется цветом: BROLLER <b>BRO</b>
@@ -254,6 +284,17 @@
     renderBrand();
     const titleKey = document.body.dataset.title;
     document.title = (titleKey ? App.t(titleKey) + " · " : "") + App.t("site.name");
+    // Описание страницы для поиска и превью ссылок — на выбранном языке.
+    const metaKey = document.body.dataset.meta;
+    const setMeta = (sel, value) => {
+      const m = document.querySelector(sel);
+      if (m) m.setAttribute("content", value);
+    };
+    setMeta('meta[property="og:title"]', document.title);
+    if (metaKey) {
+      setMeta('meta[name="description"]', App.t(metaKey));
+      setMeta('meta[property="og:description"]', App.t(metaKey));
+    }
     document.querySelectorAll("[data-lang]").forEach((b) => {
       b.setAttribute("aria-pressed", String(b.dataset.lang === state.lang));
     });
@@ -276,9 +317,62 @@
   }
   loadMetrika();
 
+  /* ---------- Приложение (PWA) ---------- */
+  // Офлайн-режим и значок на экране телефона. Работает только на настоящем сайте (https), не из файла.
+
+  if ("serviceWorker" in navigator && location.protocol === "https:") {
+    window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+  }
+
+  let installPrompt = null;
+  const installed = () =>
+    window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+
+  // Android и компьютер: браузер сам предлагает установку — показываем свою кнопку.
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    installPrompt = e;
+    showInstall();
+  });
+  window.addEventListener("appinstalled", () => {
+    installPrompt = null;
+    const box = document.getElementById("pwa-box");
+    if (box) box.hidden = true;
+  });
+
+  function showInstall() {
+    const box = document.getElementById("pwa-box");
+    if (!box || installed()) return;
+    const btn = document.getElementById("pwa-install");
+    const ios = document.getElementById("pwa-ios");
+    if (installPrompt) {
+      box.hidden = false;
+      btn.hidden = false;
+    } else if (/iphone|ipad|ipod/i.test(navigator.userAgent)) {
+      // На iPhone кнопки установки нет — показываем подсказку.
+      box.hidden = false;
+      ios.hidden = false;
+    }
+  }
+
+  function bindInstall() {
+    const btn = document.getElementById("pwa-install");
+    if (!btn) return;
+    btn.addEventListener("click", async () => {
+      if (!installPrompt) return;
+      installPrompt.prompt();
+      await installPrompt.userChoice.catch(() => null);
+      installPrompt = null;
+      btn.hidden = true;
+    });
+    showInstall();
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     renderHeader();
     renderFooter();
+    renderTabbar();
+    bindInstall();
     apply();
   });
 })();
