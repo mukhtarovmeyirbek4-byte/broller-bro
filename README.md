@@ -21,7 +21,7 @@
 | Телефон для рекламы, группа и ник в Telegram | `data/site.js` |
 | Цвета и оформление | `css/style.css` (блок `:root` в начале) |
 | Описание страниц в Google, Яндексе и Telegram | строки `meta.…` в конце файлов `lang/*.js` и `<meta name="description">` в начале каждого `.html` |
-| Картинка для ссылки в Telegram и значок сайта | `img/og-image.png`, `img/icon-*.png`, `favicon.svg` |
+| Картинка для ссылки в Telegram и значок сайта | `img/og-image.png`, `img/icon-*.png`, `img/logo-128.png`, `img/favicon-32.png` (сделаны из аватарки) |
 
 Записи «Дневника партии» и «Моя партия» хранятся в браузере у каждого фермера, на сервер они не отправляются.
 

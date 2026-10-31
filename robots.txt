@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mukhtarovmeyirbek4-byte.github.io/broller-bro/sitemap.xml
+Sitemap: https://brollerbro.uz/sitemap.xml

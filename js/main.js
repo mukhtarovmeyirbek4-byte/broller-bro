@@ -163,11 +163,7 @@
     el.innerHTML = `
       <div class="wrap header-inner">
         <a class="brand" href="index.html">
-          <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
-            <ellipse cx="16" cy="18" rx="11" ry="12" fill="#f5c542"/>
-            <circle cx="20" cy="14" r="1.8" fill="#2b2b2b"/>
-            <path d="M26 16 L31 17.5 L26 19 Z" fill="#e07a1f"/>
-          </svg>
+          <img class="brand-mark" src="img/logo-128.png" width="36" height="36" alt="" aria-hidden="true">
           <span class="brand-name"></span>
         </a>
         <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
