@@ -66,6 +66,10 @@ window.LANG.ru = {
   "batch.nextPhase": "через {n} дн. переход на корм «{name}»",
   "batch.lastPhase": "последний период корма",
   "batch.checkWeight": "Проверить вес",
+  "batch.temp": "Температура в птичнике",
+  "batch.tempLamp": "под лампой, у цыплят: {t} °C",
+  "batch.tempNoLamp": "лампы уже можно убрать",
+  "batch.tempHint": "Сбились в кучу — холодно. Дышат с открытым клювом — жарко.",
 
   // Главная
   "home.title": "Бройлеры: просто о главном",

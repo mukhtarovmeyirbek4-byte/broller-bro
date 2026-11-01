@@ -55,6 +55,16 @@
       ? t("batch.nextPhase", { n: next.from - day, name: t("phase." + next.id + ".name") })
       : t("batch.lastPhase");
     const pct = Math.min(100, (day / max) * 100);
+    const climate = (window.CLIMATE || []).find((c) => day >= c.from && day <= c.to);
+    const range = (r) => `${r[0]}–${r[1]}`;
+    const tempTile = climate
+      ? `<div class="today-tile is-wide is-temp">
+          <span>${t("batch.temp")}</span>
+          <strong>${range(climate.house)} °C</strong>
+          <small>${climate.lamp ? t("batch.tempLamp", { t: range(climate.lamp) }) : t("batch.tempNoLamp")}</small>
+          <small>${t("batch.tempHint")}</small>
+        </div>`
+      : "";
 
     todayEl.innerHTML = `
       <p class="today-head">${t("batch.today", { day })}</p>
@@ -63,6 +73,7 @@
       </div>
       <div class="today-grid">
         ${tile(t("batch.feedAll"), App.fmt((row.feed * b.birds) / 1000, 1) + " " + t("unit.kg"), "is-main")}
+        ${tempTile}
         ${tile(t("batch.feedBird"), App.fmt(row.feed) + " " + t("unit.g"))}
         ${tile(t("batch.weight"), App.fmt(row.weight) + " " + t("unit.g"))}
         ${tile(t("batch.toSale"), day <= SALE_DAY ? t("batch.daysLeft", { n: SALE_DAY - day }) : "—")}

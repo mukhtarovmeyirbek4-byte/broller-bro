@@ -4,7 +4,7 @@
   Сначала берём свежую версию из интернета, без интернета — сохранённую копию.
   После каждой публикации увеличьте номер в VERSION ("v2", "v3"…), чтобы старые копии удалились.
 */
-const VERSION = "v5";
+const VERSION = "v6";
 const CACHE = "broller-" + VERSION;
 
 // Всё, что нужно сайту для работы без интернета.
@@ -14,7 +14,7 @@ const FILES = [
   "css/style.css",
   "js/main.js", "js/home.js", "js/feeding.js", "js/growth.js", "js/calculator.js", "js/area.js", "js/diary.js",
   "lang/ru.js", "lang/uz.js", "lang/uz-latn.js",
-  "data/breeds.js", "data/phases.js", "data/defaults.js", "data/area.js", "data/site.js",
+  "data/breeds.js", "data/phases.js", "data/climate.js", "data/defaults.js", "data/area.js", "data/site.js",
   "img/favicon-32.png", "img/logo-128.png", "img/icon-192.png", "img/icon-512.png", "manifest.webmanifest",
   "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js",
 ];

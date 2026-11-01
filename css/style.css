@@ -343,6 +343,10 @@ fieldset .field { max-width: none; }
 .today-tile strong { font-size: 1.2rem; font-variant-numeric: tabular-nums; }
 .today-tile.is-main { background: #fff6d6; grid-column: 1 / -1; }
 .today-tile.is-main strong { font-size: 1.8rem; color: var(--green-dark); }
+.today-tile.is-wide { grid-column: 1 / -1; }
+.today-tile.is-temp { background: #fdeee4; }
+.today-tile.is-temp strong { color: #b4501f; }
+.today-tile.is-temp small + small { margin-top: 2px; }
 .today-phase { margin: 12px 0 0; font-size: 0.92rem; }
 .today-links { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 10px 0 0; }
 .today-links a { color: var(--green); font-weight: 600; }
