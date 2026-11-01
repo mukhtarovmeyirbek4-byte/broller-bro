@@ -631,3 +631,34 @@ select {
 
 /* Логотип в шапке (петушок с аватарки) */
 img.brand-mark { width: 36px; height: 36px; border-radius: 50%; background: #000; box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25); }
+
+/* ---------- «Моя партия»: календарь и памятка на неделю ---------- */
+.batch-tools { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.batch-tools .btn-secondary { flex: 1 1 180px; }
+.batch-tools-hint { margin: 6px 0 0; }
+
+.memo { margin-top: 8px; margin-bottom: 24px; }
+.memo-brand { margin: 0; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.06em; color: var(--green); }
+.memo h2 { margin: 4px 0 2px; }
+.memo-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 12px 0 14px; }
+.memo-actions button[disabled] { opacity: 0.45; cursor: default; }
+.memo-table td small { color: var(--muted); font-weight: 400; }
+.memo-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 16px; }
+.memo-cols > * { min-width: 0; }
+.memo-cols h3 { margin: 0 0 6px; }
+.memo-cols ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.memo-cols .memo-check { list-style: none; padding-left: 0; }
+.memo-hint { margin-top: 12px; }
+.cash-table td small { font-weight: 400; }
+
+/* Печать памятки: только она, без шапки, меню и подвала */
+@media print {
+  body.print-memo { background: #fff; }
+  body.print-memo > *:not(main) { display: none !important; }
+  body.print-memo main > *:not(#memo) { display: none !important; }
+  body.print-memo main { padding: 0 !important; max-width: none; }
+  body.print-memo #memo { border: 0; box-shadow: none; padding: 0; margin: 0; }
+  body.print-memo .memo-actions, body.print-memo .memo-hint { display: none; }
+  body.print-memo .table-wrap { overflow: visible; border: 1px solid #999; }
+  body.print-memo .data-table th, body.print-memo .data-table td { position: static !important; }
+}
