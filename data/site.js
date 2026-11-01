@@ -15,5 +15,5 @@ window.SITE = {
   adPhone: "+998933003926",
   telegramGroup: "https://t.me/brollerbro",
   telegramUser: "mkhtrvm7",
-  metrikaId: "113900983",
+  metrikaId: "113963690",
 };
